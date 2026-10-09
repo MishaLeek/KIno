@@ -1,0 +1,14 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container flash-stack" role="status">
+      {% for category, message in messages %}
+        {% set kind = category if category in ("success", "error", "info") else "info" %}
+        <div class="alert alert-{{ kind }}">
+          {{ icon({"success": "check-circle", "error": "alert-circle", "info": "info"}[kind], 20) }}
+          <p>{{ message }}</p>
+          <button class="alert-close" type="button" aria-label="Хабарламаны жабу" data-dismiss>{{ icon("x", 18) }}</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}

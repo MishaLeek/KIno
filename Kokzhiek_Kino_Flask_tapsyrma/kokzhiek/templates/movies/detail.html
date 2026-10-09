@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+{% block description %}{{ movie.tagline }}{% endblock %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <ol class="breadcrumbs">
+      <li><a href="{{ url_for('main.index') }}">Афиша</a>{{ icon("chevron-right", 14) }}</li>
+      <li><a href="{{ url_for('main.movies') }}">Фильмдер</a>{{ icon("chevron-right", 14) }}</li>
+      <li aria-current="page">{{ movie.title }}</li>
+    </ol>
+  </div>
+</header>
+
+<section class="page-body">
+  <div class="container movie-layout">
+    <img class="poster" src="{{ url_for('static', filename='img/posters/' ~ movie.slug ~ '.svg') }}" alt="«{{ movie.title }}» фильмінің постері" width="300" height="450">
+    <div>
+      <h1>{{ movie.title }}</h1>
+      <ul class="meta">
+        <li class="pill pill-age">{{ movie.age_rating }}</li>
+        <li class="pill">{{ movie.genre }}</li>
+        <li class="pill">{{ icon("clock", 14) }}{{ movie.duration_min|duration }}</li>
+      </ul>
+      <p class="hero-tagline">{{ movie.tagline }}</p>
+
+      <dl class="facts">
+        <div><dt>Режиссер</dt><dd>{{ movie.director }}</dd></div>
+        <div><dt>Шыққан жылы</dt><dd>{{ movie.year }}</dd></div>
+        <div><dt>Тілі</dt><dd>{{ movie.language }}</dd></div>
+      </dl>
+
+      <div class="prose">
+        {% for paragraph in movie.description.split("\n\n") %}
+          <p>{{ paragraph }}</p>
+        {% endfor %}
+      </div>
+
+      <h2 id="sessions">Сеанстар</h2>
+      {% if days %}
+        {% for block in days %}
+          <div class="day-block">
+            <h3>{{ icon("calendar", 18) }}{{ block.day|day_label }}, {{ block.day|kzdate(false) }}</h3>
+            <ul class="showtime-grid">
+              {% for item_showtime in block.showtimes %}
+                {% set sold_out = item_showtime.seats_left <= 0 %}
+                <li>
+                  <a class="showtime{% if sold_out %} is-sold{% endif %}" href="{{ url_for('main.showtime', showtime_id=item_showtime.id) }}">
+                    <strong>{{ item_showtime.starts_at|hhmm }}</strong>
+                    <span>{{ item_showtime.format }} · {{ item_showtime.hall_name }}</span>
+                    <span class="price">{% if sold_out %}Орын жоқ{% else %}{{ item_showtime.price|money }}{% endif %}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="empty-state">
+          {{ icon("calendar", 36) }}
+          <h3>Жақын күндері сеанс жоқ</h3>
+          <p>Афишаны кейінірек тексеріңіз.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

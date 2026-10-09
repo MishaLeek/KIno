@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#051521"/><stop offset="0.6" stop-color="#0b3346"/><stop offset="1" stop-color="#0f5a6b"/></linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.78"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#bg)"/>
+  <circle cx="288" cy="150" r="86" fill="#123f55"/>
+     <circle cx="288" cy="150" r="86" fill="none" stroke="#6fdcf0" stroke-opacity="0.55" stroke-width="2"/>
+     <ellipse cx="288" cy="150" rx="138" ry="26" fill="none" stroke="#6fdcf0" stroke-opacity="0.5" stroke-width="2" transform="rotate(-14 288 150)"/>
+     <line x1="200" y1="360" x2="-400" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="-320" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="-240" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="-160" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="-80" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="0" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="80" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="160" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="240" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="320" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="400" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="480" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="560" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="640" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="720" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="200" y1="360" x2="800" y2="600" stroke="#5fd3e8" stroke-opacity="0.25"/><line x1="0" y1="380" x2="400" y2="380" stroke="#5fd3e8" stroke-opacity="0.22"/><line x1="0" y1="405" x2="400" y2="405" stroke="#5fd3e8" stroke-opacity="0.22"/><line x1="0" y1="440" x2="400" y2="440" stroke="#5fd3e8" stroke-opacity="0.22"/><line x1="0" y1="490" x2="400" y2="490" stroke="#5fd3e8" stroke-opacity="0.22"/><line x1="0" y1="560" x2="400" y2="560" stroke="#5fd3e8" stroke-opacity="0.22"/>
+     <path d="M118 420 L146 300 L180 252 L170 222 L202 236 L236 214 L252 242 L284 300 L306 362 L276 372 L248 334 L218 344 L192 420 Z"
+       fill="#0a2633" stroke="#9fe6f2" stroke-width="2.5" stroke-linejoin="round"/>
+     <path d="M180 252 L218 300 L248 334 M202 236 L218 300 L192 420 M146 300 L218 300 M236 214 L230 262 L284 300"
+       fill="none" stroke="#9fe6f2" stroke-opacity="0.65" stroke-width="1.5"/>
+     <circle cx="236" cy="246" r="5" fill="#f2c14e"/>
+  <rect y="330" width="400" height="270" fill="url(#shade)"/>
+  <text x="32" y="44" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff" fill-opacity="0.85" letter-spacing="3">ПРЕМЬЕРА · 2026</text>
+  <rect x="318" y="24" width="56" height="30" rx="8" fill="#000" fill-opacity="0.45" stroke="#fff" stroke-opacity="0.6"/>
+  <text x="346" y="45" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#fff">12+</text>
+  <text x="32" y="452" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#ffffff" fill-opacity="0.88">Болашақтың даласында ескі аңыз оянады</text>
+  <text x="32" y="506" font-family="Segoe UI, Arial, sans-serif" font-size="50" font-weight="800" fill="#ffffff" letter-spacing="1">ТЕМІР</text><text x="32" y="560" font-family="Segoe UI, Arial, sans-serif" font-size="50" font-weight="800" fill="#ffffff" letter-spacing="1">ТҰЛПАР</text>
+</svg>

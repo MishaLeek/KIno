@@ -1,0 +1,29 @@
+{% set endpoint = request.endpoint or "" %}
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ url_for('main.index') }}" aria-label="Көкжиек кинотеатры — басты бет">
+      <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true" focusable="false">
+        <rect width="32" height="32" rx="8" fill="#1c212b"/>
+        <path d="M7 21a9 9 0 0 1 18 0Z" fill="#f2b84b"/>
+        <rect x="5" y="21" width="22" height="2.4" rx="1.2" fill="#eef1f6"/>
+        <path d="M16 6.5v3M8.2 10.2l2 2.1M23.8 10.2l-2 2.1" stroke="#f2b84b" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>Көкжиек<small>кинотеатры</small></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" data-nav-toggle>
+      {{ icon("menu", 22) }}
+      <span class="sr-only">Мәзірді ашу</span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Негізгі мәзір" data-nav>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('main.index') }}" {% if endpoint in ('main.index', 'main.showtime', 'main.buy') %}aria-current="page"{% endif %}>Афиша</a></li>
+        <li><a href="{{ url_for('main.movies') }}" {% if endpoint in ('main.movies', 'main.movie_detail') %}aria-current="page"{% endif %}>Фильмдер</a></li>
+        <li><a href="{{ url_for('main.lookup') }}" {% if endpoint in ('main.lookup', 'main.ticket') %}aria-current="page"{% endif %}>Билетті табу</a></li>
+        <li><a href="{{ url_for('main.rules') }}" {% if endpoint == 'main.rules' %}aria-current="page"{% endif %}>Ережелер</a></li>
+      </ul>
+      <a class="btn btn-primary btn-sm" href="{{ url_for('main.index') }}#schedule">{{ icon("ticket", 18) }}Билет алу</a>
+    </nav>
+  </div>
+</header>

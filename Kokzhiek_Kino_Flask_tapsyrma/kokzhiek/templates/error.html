@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ code }} — {{ title }}{% endblock %}
+
+{% block content %}
+<section class="error-page">
+  <div class="container">
+    <span class="error-code">{{ code }}</span>
+    <h1>{{ title }}</h1>
+    <p>{{ message }}</p>
+    <code class="error-name">HTTP {{ code }} · {{ name }}</code>
+    <div class="error-actions">
+      <a class="btn btn-primary" href="{{ url_for('main.index') }}">{{ icon("home", 18) }}Афишаға</a>
+      <a class="btn btn-ghost" href="{{ url_for('main.lookup') }}">Билетті табу</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

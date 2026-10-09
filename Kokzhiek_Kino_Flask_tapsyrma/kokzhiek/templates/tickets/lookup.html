@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Билетті табу{% endblock %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <ol class="breadcrumbs">
+      <li><a href="{{ url_for('main.index') }}">Афиша</a>{{ icon("chevron-right", 14) }}</li>
+      <li aria-current="page">Билетті табу</li>
+    </ol>
+    <h1>Билетті табу</h1>
+    <p class="lead">Тапсырыс коды мен сатып алу кезінде көрсеткен email мекенжайын енгізіңіз.</p>
+  </div>
+</header>
+
+<section class="page-body">
+  <div class="container">
+    <div class="panel narrow">
+      {% if error %}
+        <div class="alert alert-error" role="alert">
+          {{ icon("alert-circle", 20) }}
+          <p>{{ error }}</p>
+        </div>
+      {% endif %}
+      <form method="post" action="{{ url_for('main.lookup') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="field">
+          <label for="code">Тапсырыс коды</label>
+          <input class="input" id="code" name="code" type="text" value="{{ form.code }}" placeholder="ABCD-2345"
+                 autocomplete="off" maxlength="12" required>
+          <p class="field-hint">Код билет бетінде көрсетіледі, мысалы: DEMO-2026.</p>
+        </div>
+        <div class="field">
+          <label for="email">Электрондық пошта</label>
+          <input class="input" id="email" name="email" type="email" value="{{ form.email }}" placeholder="aigerim@mail.kz" required>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">{{ icon("search", 18) }}Билетті табу</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

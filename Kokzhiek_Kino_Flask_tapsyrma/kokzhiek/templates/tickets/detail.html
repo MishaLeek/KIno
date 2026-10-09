@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Билет {{ order.code }}{% endblock %}
+
+{% block content %}
+<section class="page-body">
+  <div class="container">
+    <article class="ticket" aria-labelledby="ticket-title">
+      <div class="ticket-main">
+        <img src="{{ url_for('static', filename='img/posters/' ~ order.slug ~ '.svg') }}" alt="" width="130" height="195">
+        <div>
+          <span class="eyebrow">Электрондық билет</span>
+          <h1 id="ticket-title">{{ order.title }}</h1>
+          <ul class="meta">
+            <li class="pill pill-age">{{ order.age_rating }}</li>
+            <li class="pill{% if order.format == '3D' %} pill-3d{% endif %}">{{ order.format }}</li>
+            <li class="pill">{{ icon("clock", 14) }}{{ order.duration_min|duration }}</li>
+          </ul>
+          <dl class="ticket-facts">
+            <div><dt>Күні</dt><dd>{{ order.starts_at|kzdate }}</dd></div>
+            <div><dt>Уақыты</dt><dd>{{ order.starts_at|hhmm }}</dd></div>
+            <div><dt>Зал</dt><dd>{{ order.hall_name }}</dd></div>
+          </dl>
+          <ul class="ticket-seats">
+            {% for item in tickets %}
+              <li>{{ item.row_no }}-қатар, {{ item.seat_no }}-орын
+                <small>· {{ "жеңілдікті" if item.kind == "discount" else "толық" }}, {{ item.price|money }}</small></li>
+            {% endfor %}
+          </ul>
+          <p class="field-hint">Сатып алушы: {{ order.full_name }} · {{ order.email }}</p>
+        </div>
+      </div>
+
+      <div class="ticket-stub">
+        <span class="muted">Тапсырыс коды</span>
+        <span class="ticket-code">{{ order.code }}</span>
+        {% set bars = barcode(order.code) %}
+        <svg class="barcode" viewBox="0 0 {{ bars.width }} {{ bars.height }}" preserveAspectRatio="none" role="img" aria-label="Билеттің штрихкоды">
+          {% for bar in bars.bars %}<rect x="{{ bar.x }}" y="0" width="{{ bar.w }}" height="{{ bars.height }}" fill="#111"/>{% endfor %}
+        </svg>
+        <span class="muted">Жалпы сомасы</span>
+        <span class="ticket-total">{{ order.total|money }}</span>
+        <span class="field-hint">Кіреберісте осы кодты көрсетіңіз</span>
+      </div>
+    </article>
+
+    <div class="ticket-actions">
+      <button class="btn btn-primary" type="button" data-print>{{ icon("printer", 18) }}Басып шығару</button>
+      <a class="btn btn-ghost" href="{{ url_for('main.index') }}">{{ icon("arrow-left", 18) }}Афишаға оралу</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

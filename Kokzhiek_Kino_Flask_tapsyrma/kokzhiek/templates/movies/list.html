@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Фильмдер{% endblock %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <ol class="breadcrumbs">
+      <li><a href="{{ url_for('main.index') }}">Афиша</a>{{ icon("chevron-right", 14) }}</li>
+      <li aria-current="page">Фильмдер</li>
+    </ol>
+    <h1>Прокаттағы фильмдер</h1>
+    <p class="lead">Көкжиек кинотеатрында қазір көрсетіліп жатқан {{ movies|length }} фильм. Постерді басып, сеанс таңдаңыз.</p>
+  </div>
+</header>
+
+<section class="page-body">
+  <div class="container">
+    <ul class="movie-grid">
+      {% for movie in movies %}
+        <li class="movie-card">
+          <a href="{{ url_for('main.movie_detail', slug=movie.slug) }}">
+            <img src="{{ url_for('static', filename='img/posters/' ~ movie.slug ~ '.svg') }}" alt="«{{ movie.title }}» фильмінің постері" width="400" height="600" loading="lazy">
+            <h3>{{ movie.title }}</h3>
+            <p>{{ movie.genre }} · {{ movie.duration_min|duration }} · {{ movie.age_rating }}</p>
+            <p>
+              {% if movie.next_showtime %}
+                Жақын сеанс: {{ movie.next_showtime|kzdate(false) }}, {{ movie.next_showtime|hhmm }}
+              {% else %}
+                Жақын күндері сеанс жоқ
+              {% endif %}
+            </p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

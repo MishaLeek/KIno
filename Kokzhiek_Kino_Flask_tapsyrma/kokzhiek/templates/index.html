@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block head_title %}Көкжиек кинотеатры — афиша және билеттер{% endblock %}
+
+{% block content %}
+{% set poster = url_for('static', filename='img/posters/' ~ featured.slug ~ '.svg') %}
+<section class="hero" style="--poster: url('{{ poster }}')">
+  <div class="container hero-inner">
+    <img class="hero-poster" src="{{ poster }}" alt="«{{ featured.title }}» фильмінің постері" width="280" height="420">
+    <div>
+      <span class="eyebrow">Бүгін экранда</span>
+      <h1>{{ featured.title }}</h1>
+      <ul class="meta">
+        <li class="pill pill-age">{{ featured.age_rating }}</li>
+        <li class="pill">{{ featured.genre }}</li>
+        <li class="pill">{{ icon("clock", 14) }}{{ featured.duration_min|duration }}</li>
+        <li class="pill">{{ featured.language }}</li>
+      </ul>
+      <p class="hero-tagline">{{ featured.tagline }}</p>
+      <p class="hero-text">{{ featured.description.split("\n\n")[0] }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="{{ url_for('main.movie_detail', slug=featured.slug) }}#sessions">{{ icon("ticket", 18) }}Билет алу</a>
+        <a class="btn btn-ghost btn-lg" href="{{ url_for('main.movie_detail', slug=featured.slug) }}">Фильм туралы</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="schedule">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Афиша</span>
+        <h2>Сеанстар кестесі</h2>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="{{ url_for('main.movies') }}">Барлық фильмдер {{ icon("arrow-right", 16) }}</a>
+    </div>
+
+    <nav class="day-tabs" aria-label="Күнді таңдау">
+      {% for day in days %}
+        <a class="day-tab" href="{{ url_for('main.index', day=day.isoformat()) }}#schedule" {% if day == selected %}aria-current="page"{% endif %}>
+          <strong>{{ day|day_label }}</strong>
+          <span>{{ day|kzdate(false) }}</span>
+        </a>
+      {% endfor %}
+    </nav>
+
+    {% if schedule %}
+      <ul class="schedule">
+        {% for item in schedule %}
+          {% set movie = item.movie %}
+          <li class="schedule-item">
+            <a href="{{ url_for('main.movie_detail', slug=movie.slug) }}" tabindex="-1">
+              <img src="{{ url_for('static', filename='img/posters/' ~ movie.slug ~ '.svg') }}" alt="" width="110" height="165" loading="lazy">
+            </a>
+            <div>
+              <h3><a href="{{ url_for('main.movie_detail', slug=movie.slug) }}">{{ movie.title }}</a></h3>
+              <ul class="meta">
+                <li class="pill pill-age">{{ movie.age_rating }}</li>
+                <li class="pill">{{ movie.genre }}</li>
+                <li class="pill">{{ icon("clock", 14) }}{{ movie.duration_min|duration }}</li>
+              </ul>
+              <ul class="showtime-grid">
+                {% for item_showtime in item.showtimes %}
+                  {% set sold_out = item_showtime.seats_left <= 0 %}
+                  <li>
+                    <a class="showtime{% if sold_out %} is-sold{% endif %}" href="{{ url_for('main.showtime', showtime_id=item_showtime.id) }}">
+                      <strong>{{ item_showtime.starts_at|hhmm }}</strong>
+                      <span>{{ item_showtime.format }} · {{ item_showtime.hall_name }}</span>
+                      <span class="price">{% if sold_out %}Орын жоқ{% else %}{{ item_showtime.price|money }}{% endif %}</span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="empty-state">
+        {{ icon("film", 40) }}
+        <h3>Бұл күнге сеанс қалмады</h3>
+        <p>Келесі күндердің бірін таңдаңыз.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

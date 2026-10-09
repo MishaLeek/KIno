@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block head_title %}{% block title %}{% endblock %} · Көкжиек кинотеатры{% endblock %}</title>
+  <meta name="description" content="{% block description %}Көкжиек кинотеатрының афишасы: сеанстар кестесі, залдағы орындарды таңдау және электрондық билет.{% endblock %}">
+  <meta name="theme-color" content="#0e1015">
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Негізгі мазмұнға өту</a>
+  {% include "partials/header.html" %}
+  <main id="main">
+    {% include "partials/flashes.html" %}
+    {% block content %}{% endblock %}
+  </main>
+  {% include "partials/footer.html" %}
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>
